@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <title>Login</title>
+    @{ 
+        string SessionUser = "";
+        if (Session["UserName"] != null)
+        {
+            SessionUser = Session["UserName"].ToString();
+        }
+    }
+    <script>
+        var username = '@SessionUser';
+        if (username != '') {
+            alert("Login Successful, Username: " + username)
+            window.location.href = "@Url.Action("About", "Home")"
+        }
+    </script>
+</head>
+<body>
+    <div id="dvloginrapper" style="height:500px;width:400px; position: fixed; left:0px; right:0px; top:0px; bottom: 0px; margin: auto">
+        <div style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; margin: auto; height: 300px; width: 90%;">
+            <form method="post" action="@Url.Action("Login", "Auth")">
+                <div class="card">
+                    <h5 class="card-header" style="text-align: center">Login</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Username or Email</label>
+                            <input type="text" name="txtUserName" class="form-control" id="exampleFormControlInput1" placeholder="username or email address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Password</label>
+                            <input type="password" name="txtPassword" class="form-control" id="exampleFormControlInput2" placeholder="password">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input style="width: 325px" value="submit" class="btn btn-primary" type="submit"/>
+                        </div>
+                        <div class="m-1">
+                            <a href="@Url.Action("Reset", "Auth")">Forget Password?</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   
+</body>
+</html>
